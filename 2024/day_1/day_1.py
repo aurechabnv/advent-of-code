@@ -3,7 +3,7 @@
 from utils import utils
 
 
-def get_lists(source) -> (list, list):
+def get_data(source) -> (list, list):
     list1, list2 = [], []
 
     data = utils.get_data(src=source, day=1).split('\n')
@@ -36,6 +36,6 @@ def part2(list1, list2):
     return similarity_score
 
 
-list_one, list_two = get_lists(utils.SRC_INPUT)
+list_one, list_two = get_data(utils.SRC_INPUT)
 print(part1(list_one, list_two))
 print(part2(list_one, list_two))
