@@ -32,4 +32,4 @@ def get_data(src: str, day: int, offset=0) -> str:
         data = get_example(day, offset=offset)
     elif src == SRC_INPUT:
         data = get_input(day)
-    return data
+    return data.strip()

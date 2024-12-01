@@ -10,9 +10,8 @@ def get_data(source) -> (list, list):
 
     for line in data:
         split_line = line.split()
-        if split_line:
-            list1.append(int(split_line[0]))
-            list2.append(int(split_line[1]))
+        list1.append(int(split_line[0]))
+        list2.append(int(split_line[1]))
 
     return list1, list2
 
@@ -30,9 +29,11 @@ def part1(list1, list2):
 
 def part2(list1, list2):
     similarity_score = 0
+
     for n in list1:
         multiplier = list2.count(n)
         similarity_score += multiplier * n
+
     return similarity_score
 
 
