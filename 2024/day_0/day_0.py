@@ -16,6 +16,7 @@ def part2(data):
     return True
 
 
-aoc_data = get_data(utils.SRC_EXAMPLE)
-print(part1(aoc_data))
-print(part2(aoc_data))
+if __name__ == '__main__':
+    aoc_data = get_data(utils.SRC_INPUT)
+    print(part1(aoc_data))
+    print(part2(aoc_data))
