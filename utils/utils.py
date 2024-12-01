@@ -31,5 +31,5 @@ def get_data(src, day, offset=0) -> (list, list):
     if src == SRC_EXAMPLE:
         data = get_example(day, offset=offset)
     elif src == SRC_INPUT:
-        data = get_input(1)
+        data = get_input(day)
     return data
