@@ -9,7 +9,7 @@ load_dotenv()
 AOC_COOKIE = os.getenv("AOC_COOKIE")
 
 SRC_EXAMPLE = 'example'
-SRC_FILE = 'input'
+SRC_INPUT = 'input'
 CUR_YEAR = datetime.now().year
 
 
@@ -30,6 +30,6 @@ def get_data(src, day, offset=0) -> (list, list):
     data = ""
     if src == SRC_EXAMPLE:
         data = get_example(day, offset=offset)
-    elif src == SRC_FILE:
+    elif src == SRC_INPUT:
         data = get_input(1)
     return data

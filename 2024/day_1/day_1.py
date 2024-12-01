@@ -36,6 +36,6 @@ def part2(list1, list2):
     return similarity_score
 
 
-list_one, list_two = get_lists(utils.SRC_FILE)
+list_one, list_two = get_lists(utils.SRC_INPUT)
 print(part1(list_one, list_two))
 print(part2(list_one, list_two))
