@@ -1,6 +1,6 @@
 import pytest
 
-from utils import utils
+from aoc import utils
 from day_0 import part1, part2, get_data
 
 

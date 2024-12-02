@@ -1,10 +1,10 @@
 # Day 2: Red-Nosed Reports
 
-from utils import utils
+import aoc
 
 
 def get_data(source):
-    data = utils.get_data(src=source, day=2)
+    data = aoc.get_data(src=source, day=2)
     data = data.splitlines()
     return [list(map(int, item.split())) for item in data]
 
@@ -51,6 +51,6 @@ def part2(data: list[list]) -> int:
 
 
 if __name__ == '__main__':
-    aoc_data = get_data(utils.SRC_INPUT)
+    aoc_data = get_data(aoc.SRC_INPUT)
     print(part1(aoc_data))
     print(part2(aoc_data))

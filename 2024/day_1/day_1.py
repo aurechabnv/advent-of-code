@@ -1,12 +1,12 @@
 # Day 1: Historian Hysteria
 
-from utils import utils
+import aoc
 
 
 def get_data(source) -> (list, list):
     list1, list2 = [], []
 
-    data = utils.get_data(src=source, day=1).split('\n')
+    data = aoc.get_data(src=source, day=1).split('\n')
 
     for line in data:
         split_line = line.split()
@@ -38,6 +38,6 @@ def part2(list1, list2):
 
 
 if __name__ == '__main__':
-    list_one, list_two = get_data(utils.SRC_INPUT)
+    list_one, list_two = get_data(aoc.SRC_INPUT)
     print(part1(list_one, list_two))
     print(part2(list_one, list_two))
