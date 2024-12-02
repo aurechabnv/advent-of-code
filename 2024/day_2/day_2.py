@@ -10,38 +10,32 @@ def get_data(source):
 
 
 def analysis(report: list) -> bool:
-    increase = None
-    for i in range(len(report)):
-        if i == len(report) - 1:
-            return True
+    cur_direction = None
+    for i in range(len(report)-1):
+        # check whether the direction has changed
+        direction = 1 if report[i] < report[i + 1] else -1
+        if cur_direction is None:
+            cur_direction = direction
+        changed_direction = direction != cur_direction
 
-        # check whether the pattern has changed
-        if report[i] < report[i + 1]:
-            if increase is None:
-                increase = True
-            elif not increase:
-                return False
-        elif report[i] > report[i + 1]:
-            if increase is None:
-                increase = False
-            elif increase:
-                return False
-
-        # check whether diff is within accepted limits
+        # get the difference
         diff = abs(report[i] - report[i + 1])
-        if not 0 < diff <= 3:
+
+        # should be within accepted limits and moving in the same direction
+        # if any of these conditions is wrong, the report is deemed unsafe
+        if not 0 < diff <= 3 or changed_direction:
             return False
     return True
 
 
-def part1(data):
+def part1(data: list[list]) -> int:
     results = []
     for report in data:
         results.append(analysis(report))
     return results.count(True)
 
 
-def part2(data: list[list]):
+def part2(data: list[list]) -> int:
     results = []
     for report in data:
         safe = analysis(report)
