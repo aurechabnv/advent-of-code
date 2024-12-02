@@ -9,6 +9,7 @@ on:
 
 env:
   YEAR: template
+  AOC_COOKIE: ${{ secrets.AOC_COOKIE }}
 
 jobs:
   build:
@@ -25,7 +26,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        echo "AOC_COOKIE=53616c7465645f5f54400878e98c968aec6e053d4f902041d08a4efced3128c7d022c7975ae2e171d52731a8dc11c313009d526e55cb4a83a5aad416e32e0595" >> $GITHUB_ENV
+        echo "AOC_COOKIE=$AOC_COOKIE" >> $GITHUB_ENV
         echo "PYTHONPATH=." >> $GITHUB_ENV
     - name: Test with pytest
       run: |
