@@ -1,14 +1,14 @@
-name: aoc_2024
+name: template
 
 on:
   workflow_dispatch:
   push:
     paths:
       - "aoc/**"
-      - "2024/**"
+      - "template/**"
 
 env:
-  YEAR: 2024
+  YEAR: template
 
 jobs:
   build:
