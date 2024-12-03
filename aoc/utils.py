@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+import time
 
 import requests
 from dotenv import load_dotenv
@@ -37,3 +38,9 @@ def get_data(src: str, day: int, year=_CUR_YEAR, offset=0) -> str:
     elif src == SRC_INPUT:
         data = _get_input(day, year=year)
     return data.strip()
+
+
+def benchmark(title, function):
+    start_time = time.time()
+    result = function()
+    print(f"{title}{' ' * (10 - len(title))} \t Time: {round(time.time() - start_time, 10)} \t Result: {result}")

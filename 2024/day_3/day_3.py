@@ -1,4 +1,6 @@
 # Day 3: Mull It Over
+
+from functools import partial
 import re
 
 import aoc
@@ -44,6 +46,6 @@ def part2_alt(data):
 
 if __name__ == '__main__':
     aoc_data = get_data(source=aoc.SRC_INPUT)
-    print(part1(aoc_data))
-    aoc_data = get_data(source=aoc.SRC_INPUT)
-    print(part2(aoc_data))
+    aoc.benchmark('Part 1', partial(part1, aoc_data))
+    aoc.benchmark('Part 2', partial(part2, aoc_data))
+    aoc.benchmark('Part 2 alt', partial(part2_alt, aoc_data))
