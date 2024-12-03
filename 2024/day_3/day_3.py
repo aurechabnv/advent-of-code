@@ -9,16 +9,19 @@ def get_data(source) -> str:
     return data
 
 
+regex_part1 = re.compile(r"mul\(\d{1,3},\d{1,3}\)")
+regex_part2 = re.compile(r"(?:(do(?:n't)?\(\)).*?)?(mul\(\d{1,3},\d{1,3}\))")
+
 def mul(a, b):
     return a * b
 
 
 def part1(data):
-    return sum(map(eval, re.findall(r"mul\(\d{1,3},\d{1,3}\)", data)))
+    return sum(map(eval, regex_part1.findall(data)))
 
 
 def part2(data):
-    matches = re.findall(r"(?:(do(?:n't)?\(\)).*?)?(mul\(\d{1,3},\d{1,3}\))", data)
+    matches = regex_part2.findall(data)
     cur_cond = "do()"
     ops = []
     for cond, op in matches:
@@ -29,7 +32,7 @@ def part2(data):
 
 
 def part2_alt(data):
-    matches = re.findall(r"(?:(do(?:n't)?\(\)).*?)?(mul\(\d{1,3},\d{1,3}\))", data)
+    matches = regex_part2.findall(data)
     class _:
         cur_cond = "do()"
         @classmethod
