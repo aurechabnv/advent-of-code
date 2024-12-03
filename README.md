@@ -9,3 +9,4 @@ I'm joining the fun this year!
 | ----------- | ----------- |
 | [Day 01: Historian Hysteria](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_1/day_1.py) | ⭐⭐ | 
 | [Day 02: Red-Nosed Reports](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_2/day_2.py) | ⭐⭐ | 
+| [Day 03: Mull It Over](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_3/day_3.py) | ⭐⭐ | 
