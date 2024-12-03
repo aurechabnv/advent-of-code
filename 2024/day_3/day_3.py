@@ -19,14 +19,13 @@ def part1(data):
 
 def part2(data):
     matches = re.findall(r"(?:(do(?:n't)?\(\)).*?)?(mul\(\d{1,3},\d{1,3}\))", data)
-    instruction = "do()"
-    instructions = []
-    for t in matches:
-        if t[0] and t[0] != instruction:
-            instruction = t[0]
-        if instruction == "do()":
-            instructions.append(t[1])
-    return sum(map(eval, instructions))
+    cur_cond = "do()"
+    ops = []
+    for cond, op in matches:
+        cur_cond = cond if cond and cond != cur_cond else cur_cond
+        if cur_cond == "do()":
+            ops.append(op)
+    return sum(map(eval, ops))
 
 
 if __name__ == '__main__':
