@@ -28,6 +28,17 @@ def part2(data):
     return sum(map(eval, ops))
 
 
+def part2_alt(data):
+    matches = re.findall(r"(?:(do(?:n't)?\(\)).*?)?(mul\(\d{1,3},\d{1,3}\))", data)
+    class _:
+        cur_cond = "do()"
+        @classmethod
+        def check(cls, cond):
+            cls.cur_cond = cond if cond and cond != cls.cur_cond else cls.cur_cond
+            return cls.cur_cond == "do()"
+    return sum(map(eval, [op for cond, op in matches if _.check(cond)]))
+
+
 if __name__ == '__main__':
     aoc_data = get_data(source=aoc.SRC_INPUT)
     print(part1(aoc_data))
