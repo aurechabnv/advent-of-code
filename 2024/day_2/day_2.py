@@ -53,6 +53,6 @@ def part2(data: list[list]) -> int:
 
 
 if __name__ == '__main__':
-    aoc_data = get_data(aoc.SRC_INPUT)
+    aoc_data = get_data(aoc.SOURCE.INPUT)
     aoc.benchmark('Part 1', partial(part1, aoc_data))
     aoc.benchmark('Part 2', partial(part2, aoc_data))

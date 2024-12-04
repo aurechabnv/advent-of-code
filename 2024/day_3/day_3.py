@@ -6,8 +6,8 @@ import re
 import aoc
 
 
-def get_data(source) -> str:
-    data = aoc.get_data(src=source, day=3)
+def get_data(source, offset=0) -> str:
+    data = aoc.get_data(src=source, day=3, offset=offset)
     return data
 
 
@@ -45,7 +45,7 @@ def part2_alt(data):
 
 
 if __name__ == '__main__':
-    aoc_data = get_data(source=aoc.SRC_INPUT)
+    aoc_data = get_data(source=aoc.SOURCE.INPUT)
     aoc.benchmark('Part 1', partial(part1, aoc_data))
     aoc.benchmark('Part 2', partial(part2, aoc_data))
     aoc.benchmark('Part 2 alt', partial(part2_alt, aoc_data))

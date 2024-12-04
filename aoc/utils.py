@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 import time
+from enum import Enum
 
 import requests
 from dotenv import load_dotenv
@@ -10,8 +11,10 @@ load_dotenv()
 _AOC_COOKIE = os.getenv('AOC_COOKIE')
 _CUR_YEAR = datetime.now().year
 
-SRC_EXAMPLE = 'example'
-SRC_INPUT = 'input'
+
+class SOURCE(Enum):
+    EXAMPLE = 1
+    INPUT = 2
 
 
 def _get_input(day: int, year: int) -> str:
@@ -31,11 +34,11 @@ def _get_example(day: int, year: int, offset: int) -> str:
     return blocks[offset + 1].split('</code></pre>')[0]
 
 
-def get_data(src: str, day: int, year=_CUR_YEAR, offset=0) -> str:
+def get_data(src: SOURCE, day: int, year=_CUR_YEAR, offset=0) -> str:
     data = ''
-    if src == SRC_EXAMPLE:
+    if src == SOURCE.EXAMPLE:
         data = _get_example(day, year=year, offset=offset)
-    elif src == SRC_INPUT:
+    elif src == SOURCE.INPUT:
         data = _get_input(day, year=year)
     return data.strip()
 

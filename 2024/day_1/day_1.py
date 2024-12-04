@@ -40,6 +40,6 @@ def part2(list1, list2):
 
 
 if __name__ == '__main__':
-    list_one, list_two = get_data(aoc.SRC_INPUT)
+    list_one, list_two = get_data(aoc.SOURCE.INPUT)
     aoc.benchmark('Part 1', partial(part1, list_one, list_two))
     aoc.benchmark('Part 2', partial(part2, list_one, list_two))
