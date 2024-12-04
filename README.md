@@ -22,9 +22,7 @@ I'm joining the fun this year!
   - Windows (Git Bash) : `source env/Scripts/activate`
 - Install dependencies with `pip install -r requirements.txt`
 
-For the data requests to work, you are required to add a `.env` file at the project root containing the following.
-
-`AOC_COOKIE="myvalue"`
+For the data requests to work, you are required to add a `.env` file at the project root containing `AOC_COOKIE="myvalue"`
 
 Get your cookie value by inspecting the AOC website (F12) while logged in.
 
