@@ -44,6 +44,7 @@ def get_data(src: SOURCE, day: int, year=_CUR_YEAR, offset=0) -> str:
 
 
 def benchmark(title, function):
-    start_time = time.time()
+    start_time = time.perf_counter()
     result = function()
-    print(f"{title}{' ' * (10 - len(title))} \t Time: {round(time.time() - start_time, 10)} \t Result: {result}")
+    end_time = time.perf_counter()
+    print(f"{title}{' ' * (10 - len(title))} \t Time: {round(end_time - start_time, 10)} \t Result: {result}")
