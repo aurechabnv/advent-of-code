@@ -5,17 +5,17 @@ from functools import partial
 import aoc
 
 
-def get_data(source) -> str:
+def get_data(source):
     data = aoc.get_data(src=source, day=0)
     return data
 
 
 def part1(data):
-    return True
+    return 0
 
 
 def part2(data):
-    return True
+    return 0
 
 
 if __name__ == '__main__':
