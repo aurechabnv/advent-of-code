@@ -14,11 +14,7 @@ def get_data(source):
     return data
 
 
-def part1(data):
-    operators = {
-        '+': operator.add,
-        '*': operator.mul
-    }
+def sum_up_valid_results(data, operators):
     equations = []
 
     for target, numbers in data:
@@ -29,8 +25,8 @@ def part1(data):
         for combination in combinations:
             operations = [(combination[i], numbers[i + 1]) for i in range(len(combination))]
             result = numbers[0]
-            for cur_op, number in operations:
-                result = operators[cur_op](result, number)
+            for symbol, number in operations:
+                result = operators[symbol](result, number)
             nb_valid += result == target
 
         equations.append((target, nb_valid))
@@ -38,8 +34,21 @@ def part1(data):
     return sum([k for k, v in equations if v > 0])
 
 
+def part1(data):
+    operators = {
+        '+': operator.add,
+        '*': operator.mul
+    }
+    return sum_up_valid_results(data, operators)
+
+
 def part2(data):
-    return 0
+    operators = {
+        '+': operator.add,
+        '*': operator.mul,
+        '||': lambda v1, v2: int(str(v1) + str(v2))
+    }
+    return sum_up_valid_results(data, operators)
 
 
 if __name__ == '__main__':
