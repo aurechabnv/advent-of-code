@@ -15,23 +15,17 @@ def get_data(source):
 
 
 def sum_up_valid_results(data, operators):
-    equations = []
-
-    for target, numbers in data:
-        nb_operations = len(numbers) - 1
-        combinations = list(itertools.product(operators.keys(), repeat=nb_operations))
-        nb_valid = 0
-
+    results = []
+    for number, sequence in data:
+        combinations = list(itertools.product(operators.keys(), repeat=len(sequence)-1))
         for combination in combinations:
-            operations = [(combination[i], numbers[i + 1]) for i in range(len(combination))]
-            result = numbers[0]
-            for symbol, number in operations:
-                result = operators[symbol](result, number)
-            nb_valid += result == target
-
-        equations.append((target, nb_valid))
-
-    return sum([k for k, v in equations if v > 0])
+            result = sequence[0]
+            for symbol, nb in zip(combination, sequence[1:]):
+                result = operators[symbol](result, nb)
+            if result == number:
+                results.append(number)
+                break
+    return sum(results)
 
 
 def part1(data):
@@ -46,7 +40,7 @@ def part2(data):
     operators = {
         '+': operator.add,
         '*': operator.mul,
-        '||': lambda v1, v2: int(str(v1) + str(v2))
+        '||': lambda a, b: int(f'{a}{b}')
     }
     return sum_up_valid_results(data, operators)
 
