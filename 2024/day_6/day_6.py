@@ -27,10 +27,6 @@ DIR_VALUES = {
 }
 
 
-def print_map(floor_map):
-    print('\n'.join([''.join(row) for row in floor_map]))
-
-
 def get_next_direction(cur_direction: DIRECTION):
     index = DIR_SEQ.index(cur_direction)
     return DIR_SEQ[0] if index == len(DIR_SEQ) - 1 else DIR_SEQ[index + 1]
@@ -41,48 +37,56 @@ def get_cur_pos(floor_map, direction: DIRECTION):
     return [(floor_map.index(row), row.index(col)) for row in floor_map for col in row if col == marker][0]
 
 
-def move(floor_map, cur_direction: DIRECTION):
-    move_y, move_x = DIR_VALUES.get(cur_direction)
-    cur_y, cur_x = get_cur_pos(floor_map, cur_direction)
-    next_marker = ''
+def map_patrol(floor_map, detect_loop=False):
+    direction = DIRECTION.UP
+    route = set()
+    cur_y, cur_x = get_cur_pos(floor_map, direction)
+    looping = False
 
-    while next_marker != '#':
-        floor_map[cur_y][cur_x] = 'x' # update current spot
+    while True:
+        move_y, move_x = DIR_VALUES.get(direction)
+        cur_spot = (cur_y, cur_x, direction.value) if detect_loop else (cur_y, cur_x)
+
+        if detect_loop and cur_spot in route:
+            looping = True
+            break
+
+        route.add(cur_spot)
+
         next_y = cur_y + move_y
         next_x = cur_x + move_x
 
-        # out of boundaries
+        # out of bounds
         if next_y >= len(floor_map) or next_y < 0 or next_x >= len(floor_map[0]) or next_x < 0:
-            return True
+            break
 
         next_marker = floor_map[next_y][next_x]
-
-        if next_marker != '#':
-            floor_map[next_y][next_x] = cur_direction.value
-            cur_y, cur_x = next_y, next_x
+        if next_marker == '#' or next_marker == 'O':
+            direction = get_next_direction(direction)
         else:
-            new_direction = get_next_direction(cur_direction)
-            floor_map[cur_y][cur_x] = new_direction.value
+            cur_y, cur_x = next_y, next_x
 
-    return False
+    return route, looping
 
 
 def part1(data):
-    direction = DIRECTION.UP
-    out_of_map = False
-    while not out_of_map:
-        out_of_map = move(data, direction)
-        if not out_of_map:
-            direction = get_next_direction(cur_direction=direction)
-    # print_map(data)
-    return sum([row.count('x') for row in data])
+    route, _ = map_patrol(data)
+    return len(route)
 
 
 def part2(data):
-    return 0
+    route, _ = map_patrol(data)
+    loops = 0
+    for cur_y, cur_x in route:
+        if data[cur_y][cur_x] != '^':
+            data[cur_y][cur_x] = 'O'
+            _, looping = map_patrol(data, detect_loop=True)
+            loops += looping
+            data[cur_y][cur_x] = '.'
+    return loops
 
 
 if __name__ == '__main__':
-    aoc_data = get_data(aoc.SOURCE.EXAMPLE)
+    aoc_data = get_data(aoc.SOURCE.INPUT)
     aoc.benchmark('Part 1', partial(part1, aoc_data))
     aoc.benchmark('Part 2', partial(part2, aoc_data))
