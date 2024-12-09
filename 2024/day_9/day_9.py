@@ -16,12 +16,12 @@ def get_checksum(liste):
 
 
 def part1(data):
-    disk_map = [[int(n), (i//2 if not i % 2 else '.')] for i, n in enumerate(data)]
-    new_disk_map = []
-    files_to_move = disk_map[::2][::-1]
-    max_length = len(disk_map)
+    disk_grid = [[int(n), (i//2 if not i % 2 else '.')] for i, n in enumerate(data)]
+    disk = []
+    files_to_move = disk_grid[::2][::-1]
+    max_length = len(disk_grid)
 
-    for i, (n, val) in enumerate(disk_map):
+    for i, (n, val) in enumerate(disk_grid):
         if i == max_length:
             break
         if val == '.':
@@ -30,39 +30,36 @@ def part1(data):
                     files_to_move = files_to_move[1:]
                     max_length -= 2
                 spaces, nb = files_to_move[0]
-                new_disk_map.extend(itertools.repeat(nb, min(spaces, n)))
+                disk.extend(itertools.repeat(nb, min(spaces, n)))
                 files_to_move[0][0] = max(spaces - n, 0)
                 n = n - min(spaces, n)
         else:
-            new_disk_map.extend(itertools.repeat(val, n))
+            disk.extend(itertools.repeat(val, n))
 
-    return get_checksum(new_disk_map)
+    return get_checksum(disk)
 
 
 def part2(data):
-    disk_map = {i: [(int(n), (i // 2 if not i % 2 else '.'))] for i, n in enumerate(data)}
-    files = {k: v for k, v in disk_map.items() if not k % 2}
-    spaces = {k: v for k, v in disk_map.items() if k % 2}
+    disk_dict = {i: [(int(n), (i // 2 if not i % 2 else '.'))] for i, n in enumerate(data)}
+    files = {k: v for k, v in disk_dict.items() if not k % 2}
+    spaces = {k: v for k, v in disk_dict.items() if k % 2}
 
-    for k in list(files.keys())[::-1]:
-        size, name = files.get(k)[0]
+    for k_file in list(files.keys())[::-1]:
+        file = files[k_file][0]
+        f_size = file[0]
 
-        for h, values in spaces.items():
-            s_size, s_name = values[-1]
-            if size <= s_size and k > h:
-                spaces.get(h).pop(-1)
-                spaces[h].append(files.get(k)[0])
-                spaces[h].append((s_size - size, '.'))
-                files[k] = [(size, '.')]
+        for k_space, items in spaces.items():
+            s_size = items[-1][0]
+            if f_size <= s_size and k_file > k_space:
+                spaces[k_space].pop(-1)
+                spaces[k_space].extend([file, (s_size - f_size, '.')])
+                files[k_file] = [(f_size, '.')]
                 break
 
-    disk_map.update(files)
-    disk_map.update(spaces)
-    array = []
-    for values in disk_map.values():
-        array.extend(values)
-    new_disk_map = list(itertools.chain.from_iterable([list(itertools.repeat(name, size)) for size, name in array]))
-    return get_checksum(new_disk_map)
+    disk_dict = { **disk_dict, **files, **spaces }
+    disk_grid = itertools.chain(*disk_dict.values())
+    disk = itertools.chain.from_iterable([itertools.repeat(name, size) for size, name in disk_grid])
+    return get_checksum(disk)
 
 if __name__ == '__main__':
     aoc_data = get_data(aoc.SOURCE.INPUT)
