@@ -12,7 +12,7 @@ def get_data(source):
 
 
 def get_checksum(liste):
-    return sum([i * nb for i, nb in enumerate(liste)])
+    return sum([size * name for size, name in enumerate(liste) if name != '.'])
 
 
 def part1(data):
@@ -40,11 +40,31 @@ def part1(data):
 
 
 def part2(data):
-    return 0
+    disk_map = {i: [(int(n), (i // 2 if not i % 2 else '.'))] for i, n in enumerate(data)}
+    files = {k: v for k, v in disk_map.items() if not k % 2}
+    spaces = {k: v for k, v in disk_map.items() if k % 2}
 
+    for k in list(files.keys())[::-1]:
+        size, name = files.get(k)[0]
+
+        for h, values in spaces.items():
+            s_size, s_name = values[-1]
+            if size <= s_size and k > h:
+                spaces.get(h).pop(-1)
+                spaces[h].append(files.get(k)[0])
+                spaces[h].append((s_size - size, '.'))
+                files[k] = [(size, '.')]
+                break
+
+    disk_map.update(files)
+    disk_map.update(spaces)
+    array = []
+    for values in disk_map.values():
+        array.extend(values)
+    new_disk_map = list(itertools.chain.from_iterable([list(itertools.repeat(name, size)) for size, name in array]))
+    return get_checksum(new_disk_map)
 
 if __name__ == '__main__':
     aoc_data = get_data(aoc.SOURCE.INPUT)
-    # aoc_data = '2333133121414131402352134'
     aoc.benchmark('Part 1', partial(part1, aoc_data))
     aoc.benchmark('Part 2', partial(part2, aoc_data))

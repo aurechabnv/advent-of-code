@@ -15,7 +15,7 @@ I'm joining the fun this year!
 | [Day 06: Guard Gallivant](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_6/day_6.py)    | ⭐⭐ |
 | [Day 07: Bridge Repair](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_7/day_7.py)      | ⭐⭐ |
 | [Day 08: Resonant Collinearity](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_8/day_8.py)      | ⭐⭐ |
-| [Day 09: Disk Fragmenter](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_9/day_9.py)      | ⭐ | 
+| [Day 09: Disk Fragmenter](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_9/day_9.py)      | ⭐⭐ | 
 
 
 ## How to use this repo
