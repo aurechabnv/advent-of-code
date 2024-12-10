@@ -39,9 +39,11 @@ for child in template_folder.iterdir():
 # update table in README.md
 with open(base_path / 'README.md', 'r') as f:
     content = f.read()
-matches = re.compile(fr'(\| \[Day \d{int(day)-1}: (.*)].*\|)').search(content)
+matches = re.compile(fr'(\| \[Day ({str(int(day)-1).zfill(2)}): (.*)].*\|)').search(content)
 last_table_line = matches.group(1)
-new_table_line = last_table_line.replace(matches.group(2), day_title).replace(str(int(day)-1), day).replace('⭐','')
+new_table_line = ((last_table_line.replace(matches.group(2), day.zfill(2))
+                                  .replace(matches.group(3), day_title))
+                                  .replace('⭐',''))
 content = content.replace(last_table_line, last_table_line + '\n' + new_table_line)
 with open(base_path / 'README.md', 'w') as f:
     f.write(content)
