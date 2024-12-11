@@ -13,28 +13,32 @@ def get_data(source):
     return data.split()
 
 
-def part1(data):
+def count_pebbles(data, turns):
     pebbles = list(map(int, data))
     # print(pebbles)
-    for _ in range(25):
+    for _ in range(turns):
         for stone in pebbles.copy():
             index = pebbles.index(stone)
             if stone == 0:
                 pebbles[index] = 1
             elif not len(string := str(stone)) % 2:
-                pebbles[index] = int(string[len(string)//2:])
-                pebbles.insert(index, int(string[:len(string)//2]))
+                pebbles[index] = int(string[:len(string)//2])
+                pebbles.insert(index + 1, int(string[len(string)//2:]))
             else:
                 pebbles[index] = stone * 2024
         # print('turn', _ + 1, len(pebbles))
     return len(pebbles)
 
 
+def part1(data):
+    return count_pebbles(data, turns=25)
+
+
 def part2(data):
-    return 0
+    return count_pebbles(data, turns=75)
 
 
 if __name__ == '__main__':
-    aoc_data = get_data(aoc.SOURCE.INPUT)
+    aoc_data = get_data(aoc.SOURCE.EXAMPLE)
     aoc.benchmark('Part 1', partial(part1, aoc_data))
     aoc.benchmark('Part 2', partial(part2, aoc_data))
