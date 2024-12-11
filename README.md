@@ -17,7 +17,7 @@ I'm joining the fun this year!
 | [Day 08: Resonant Collinearity](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_8/day_8.py)     | ⭐⭐ |
 | [Day 09: Disk Fragmenter](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_9/day_9.py)     | ⭐⭐ |
 | [Day 10: Hoof It](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_10/day_10.py)      | ⭐⭐ |
-| [Day 11: Plutonian Pebbles](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_11/day_11.py)      | ⭐ |
+| [Day 11: Plutonian Pebbles](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_11/day_11.py)      | ⭐⭐ |
 
 
 ## How to use this repo
