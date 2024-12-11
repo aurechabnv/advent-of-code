@@ -1,5 +1,6 @@
 # Day 11: Plutonian Pebbles
 
+import math
 from collections import defaultdict
 from functools import partial
 
@@ -18,9 +19,9 @@ def apply_rules(stone):
     pebbles = []
     if stone == 0:
         pebbles.append(1)
-    elif not len(string := str(stone)) % 2:
-        half = len(string) // 2
-        pebbles.extend([int(string[:half]), int(string[half:])])
+    elif not (length := math.ceil(math.log10(stone + 1))) % 2:
+        divider = 10 ** (length // 2)
+        pebbles.extend([stone // divider, stone % divider])
     else:
         pebbles.append(stone * 2024)
     return pebbles
