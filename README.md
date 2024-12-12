@@ -18,6 +18,7 @@ I'm joining the fun this year!
 | [Day 09: Disk Fragmenter](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_9/day_9.py)     | ⭐⭐ |
 | [Day 10: Hoof It](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_10/day_10.py)      | ⭐⭐ |
 | [Day 11: Plutonian Pebbles](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_11/day_11.py)      | ⭐⭐ |
+| [Day 12: Garden Groups](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_12/day_12.py)      | ⭐ |
 
 
 ## How to use this repo
