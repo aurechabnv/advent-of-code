@@ -47,4 +47,4 @@ def benchmark(title, function):
     start_time = time.perf_counter()
     result = function()
     end_time = time.perf_counter()
-    print(f"{title}{' ' * (10 - len(title))} \t Time: {round(end_time - start_time, 10)} \t Result: {result}")
+    print(f"{title}{' ' * (10 - len(title))} \t Time: {end_time - start_time:.4f} \t Result: {result}")
