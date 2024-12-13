@@ -22,16 +22,16 @@ def count_presses_to_prize(btn_a, btn_b, prize, correction):
     bx, by = btn_b
     px, py = prize
     solution = np.linalg.solve([[ax, bx], [ay, by]], [[px + correction], [py + correction]])
-    x, y = (el[0] for el in np.round(solution, decimals=2))
-    return (x, y) if not x % 1 and not y % 1 else (0, 0)
+    a, b = (el[0] for el in np.round(solution, decimals=2))
+    return (a, b) if not a % 1 and not b % 1 else (0, 0)
 
 
 def count_tokens(machines, correction = 0):
     tokens = 0
     for btn_a, btn_b, prize in machines:
-        x, y = count_presses_to_prize(btn_a, btn_b, prize, correction)
-        if correction or x <= 100 and y <= 100: # my dataset doesn't even require this check
-            tokens += x * 3 + y
+        a, b = count_presses_to_prize(btn_a, btn_b, prize, correction)
+        if correction or a <= 100 and b <= 100: # my dataset doesn't even require this check
+            tokens += a * 3 + b
     return tokens
 
 
