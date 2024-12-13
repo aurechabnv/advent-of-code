@@ -19,7 +19,7 @@ I'm joining the fun this year!
 | [Day 10: Hoof It](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_10/day_10.py)      | ⭐⭐ |
 | [Day 11: Plutonian Pebbles](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_11/day_11.py)      | ⭐⭐ |
 | [Day 12: Garden Groups](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_12/day_12.py)      | ⭐⭐ |
-| [Day 13: Claw Contraption](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_13/day_13.py)      | ⭐ |
+| [Day 13: Claw Contraption](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_13/day_13.py)      | ⭐⭐ |
 
 
 ## How to use this repo

@@ -10,36 +10,37 @@ import aoc
 
 def get_data(source):
     data = aoc.get_data(src=source, day=13)
-    data = data.split('\n\n')
     regex = re.compile(r'(\d+)')
-    equations = []
-    for eq in data:
-        equations.append([tuple(map(int, regex.findall(el))) for el in eq.split('\n')])
-    return equations
+    machines = []
+    for specs in data.split('\n\n'):
+        machines.append([tuple(map(int, regex.findall(spec))) for spec in specs.split('\n')])
+    return machines
 
 
-def count_presses_to_prize(a, b, r):
-    ax, ay = a
-    bx, by = b
-    rx, ry = r
-    solution = np.linalg.solve([[ax, bx], [ay, by]], [[rx], [ry]])
-    x, y = [el[0] for el in np.round(solution, decimals=2)]
-    if not x % 1 and not y % 1:
-        return x, y
-    return 0, 0
+def count_presses_to_prize(btn_a, btn_b, prize, correction):
+    ax, ay = btn_a
+    bx, by = btn_b
+    px, py = prize
+    solution = np.linalg.solve([[ax, bx], [ay, by]], [[px + correction], [py + correction]])
+    x, y = (el[0] for el in np.round(solution, decimals=2))
+    return (x, y) if not x % 1 and not y % 1 else (0, 0)
 
 
-def part1(data):
+def count_tokens(machines, correction = 0):
     price = 0
-    for a, b, r in data:
-        x, y = count_presses_to_prize(a, b, r)
-        if x <= 100 and y <= 100:
-            price += x * 3 + y * 1
+    for btn_a, btn_b, prize in machines:
+        x, y = count_presses_to_prize(btn_a, btn_b, prize, correction)
+        if correction or x <= 100 and y <= 100: # my dataset doesn't even require this check
+            price += x * 3 + y
     return price
 
 
+def part1(data):
+    return count_tokens(data)
+
+
 def part2(data):
-    return 0
+    return count_tokens(data, correction=10000000000000)
 
 
 if __name__ == '__main__':
