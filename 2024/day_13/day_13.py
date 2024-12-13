@@ -27,12 +27,12 @@ def count_presses_to_prize(btn_a, btn_b, prize, correction):
 
 
 def count_tokens(machines, correction = 0):
-    price = 0
+    tokens = 0
     for btn_a, btn_b, prize in machines:
         x, y = count_presses_to_prize(btn_a, btn_b, prize, correction)
         if correction or x <= 100 and y <= 100: # my dataset doesn't even require this check
-            price += x * 3 + y
-    return price
+            tokens += x * 3 + y
+    return tokens
 
 
 def part1(data):
