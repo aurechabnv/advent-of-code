@@ -1,9 +1,25 @@
 # Day 12: Garden Groups
 
-from collections import defaultdict
+from enum import Enum
 from functools import partial
 
 import aoc
+
+
+class CARDINALS(Enum):
+    NORTH = (-1, 0)
+    SOUTH = (1, 0)
+    EAST = (0, 1)
+    WEST = (0, -1)
+
+COMPASS = [CARDINALS.NORTH, CARDINALS.EAST, CARDINALS.SOUTH, CARDINALS.WEST]
+
+GO_ALONG = {
+    CARDINALS.NORTH: [CARDINALS.EAST, CARDINALS.WEST],
+    CARDINALS.EAST: [CARDINALS.NORTH, CARDINALS.SOUTH],
+    CARDINALS.SOUTH: [CARDINALS.EAST, CARDINALS.WEST],
+    CARDINALS.WEST: [CARDINALS.NORTH, CARDINALS.SOUTH]
+}
 
 
 def get_data(source):
@@ -11,54 +27,89 @@ def get_data(source):
     return data.splitlines()
 
 
-COMPASS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-
-
-def find_neighbors(grid, regions, plant, coords):
-    if grid[coords].get('area'):
+def find_neighbors(plant: str, coords: tuple, land, regions: list):
+    if land[coords].get('region'):
         return
 
-    (y, x) = coords
-    area = 0
-    fences = 4
+    y, x = coords
+    fences = COMPASS.copy()
+    region = None
     neighbors = []
 
-    for dy, dx in COMPASS:
-        if (n_coords := (y + dy, x + dx)) in grid:
-            if grid[n_coords]['plant'] == plant:
+    for direction in COMPASS:
+        dy, dx = direction.value
+        if (n_coords := (y + dy, x + dx)) in land:
+            if land[n_coords].get('plant') == plant:
                 neighbors.append(n_coords)
-                fences -= 1
-                if plot_area := grid[n_coords].get('area'):
-                    area = plot_area
-    if area == 0:
-        area = len(regions[plant]) + 1
-        regions[plant].append([])
+                fences.remove(direction)
+                if plot_region := land[n_coords].get('region'):
+                    region = plot_region
 
-    grid[(y, x)].update({'area': area, 'fences': fences})
-    regions[plant][area - 1].append(((y, x), fences))
+    if not region:
+        region = len(regions) + 1
+        regions.append([])
+
+    land[(y, x)].update({'region': region})
+    regions[region - 1].append(((y, x), fences))
 
     if neighbors:
         for neighbor in neighbors:
-            find_neighbors(grid, regions, plant, neighbor)
+            find_neighbors(plant, neighbor, land, regions)
+
+
+def map_land(data):
+    land = {(y, x): {'plant': plant} for y, line in enumerate(data) for x, plant in enumerate(line)}
+    regions = []
+    for coords, plot in land.items():
+        find_neighbors(plot.get('plant'), coords, land, regions)
+    return regions
+
+
+def build_fences(coords, fences, borders):
+    consolidated_fences = []
+    for fence in fences.copy():
+        y, x = coords
+        directions = GO_ALONG[fence]
+        new_fence = set()
+
+        new_fence.add(coords)
+        fences.pop(fences.index(fence))
+
+        for direction in directions:
+            dy, dx = direction.value
+            while (next_coords := (y + dy, x + dx)) in borders:
+                if fence in (plot := borders[next_coords]):
+                    new_fence.add(next_coords)
+                    plot.pop(plot.index(fence))
+                    y, x = next_coords
+                else:
+                    break
+
+        if new_fence:
+            consolidated_fences.append(new_fence)
+    return consolidated_fences
 
 
 def part1(data):
-    grid = {(y, x): {'plant': item} for y, line in enumerate(data) for x, item in enumerate(line)}
-    regions = defaultdict(list)
-
-    for (y, x), specs in grid.items():
-        find_neighbors(grid, regions, specs.get('plant'), (y, x))
-
+    regions = map_land(data)
     full_price = 0
-    for plant, cultures in regions.items():
-        for region in cultures:
-            full_price += len(region) * sum([fences for coords, fences in region])
+
+    for region in regions:
+        full_price += len(region) * sum([len(fences) for coords, fences in region])
 
     return full_price
 
 
 def part2(data):
-    return 0
+    regions = map_land(data)
+    full_price = 0
+
+    for region in regions:
+        borders = {coords: fences for coords, fences in region if len(fences) > 0}
+        perimeter = sum([len(build_fences(coords, fences, borders)) for coords, fences in sorted(borders.items())])
+        full_price += len(region) * perimeter
+
+    return full_price
 
 
 if __name__ == '__main__':
