@@ -1,6 +1,6 @@
 # Day 13: Claw Contraption
 
-import re
+from re import compile
 from functools import partial
 
 import numpy as np
@@ -10,7 +10,7 @@ import aoc
 
 def get_data(source):
     data = aoc.get_data(src=source, day=13)
-    regex = re.compile(r'(\d+)')
+    regex = compile(r'(\d+)')
     machines = []
     for specs in data.split('\n\n'):
         machines.append([tuple(map(int, regex.findall(spec))) for spec in specs.split('\n')])
@@ -23,7 +23,7 @@ def count_presses_to_prize(btn_a, btn_b, prize, correction):
     px, py = prize
     solution = np.linalg.solve([[ax, bx], [ay, by]], [[px + correction], [py + correction]])
     a, b = (el[0] for el in np.round(solution, decimals=2))
-    return (a, b) if not a % 1 and not b % 1 else (0, 0)
+    return (0, 0) if a % 1 or b % 1 else (a, b)
 
 
 def count_tokens(machines, correction = 0):
