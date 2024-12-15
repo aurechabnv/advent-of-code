@@ -19,7 +19,7 @@ class SOURCE(Enum):
 
 def _get_input(day: int, year: int) -> str:
     response = requests.get(f"https://adventofcode.com/{year}/day/{day}/input",
-                            headers={'cookie': 'session=' + _AOC_COOKIE})
+                            cookies={'session': _AOC_COOKIE})
     if response.status_code != 200:
         return ''
     return response.text
@@ -27,7 +27,7 @@ def _get_input(day: int, year: int) -> str:
 
 def _get_example(day: int, year: int, offset: int) -> str:
     response = requests.get(f"https://adventofcode.com/{year}/day/{day}",
-                            headers={'cookie': 'session=' + _AOC_COOKIE})
+                            cookies={'session': _AOC_COOKIE})
     if response.status_code != 200:
         return ''
     blocks = response.text.split('<pre><code>')
