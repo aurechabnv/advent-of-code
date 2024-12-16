@@ -22,6 +22,7 @@ I'm joining the fun this year!
 | [Day 13: Claw Contraption](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_13/day_13.py)      | ⭐⭐ |
 | [Day 14: Restroom Redoubt](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_14/day_14.py)      | ⭐⭐ |
 | [Day 15: Warehouse Woes](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_15/day_15.py)      | ⭐⭐ |
+| [Day 16: Reindeer Maze](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_16/day_16.py)      | ⭐ |
 
 
 ## How to use this repo
