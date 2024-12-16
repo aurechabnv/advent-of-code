@@ -1,9 +1,10 @@
 # Day 14: Restroom Redoubt
 
-from re import compile
 from functools import partial
+from re import compile
 
 import aoc
+from aoc import COMPASS
 
 
 def get_data(source):
@@ -13,7 +14,7 @@ def get_data(source):
     regex = compile(r'-?\d+')
     for robot in data:
         digits = list(map(int, regex.findall(robot)))
-        robots.append([(digits[2], digits[3]), (digits[0], digits[1])])
+        robots.append([(digits[3], digits[2]), (digits[1], digits[0])])
 
     dimensions = (101, 103) if source == aoc.SOURCE.INPUT else (11, 7)
 
@@ -21,16 +22,16 @@ def get_data(source):
 
 
 def create_grid(width, height):
-    return {(x, y): 0 for x in range(width) for y in range(height)}
+    return {(y, x): 0 for x in range(width) for y in range(height)}
 
 
-def move_robot(dimensions, coords, speed, seconds = 1):
+def move_robot(dimensions, coords, speed, seconds=1):
     if seconds == 0:
         return coords
-    x, y = coords
-    vx, vy = speed
+    y, x = coords
+    vy, vx = speed
     max_x, max_y = dimensions
-    coords = (x + vx) % max_x, (y + vy) % max_y
+    coords = (y + vy) % max_y, (x + vx) % max_x
     return move_robot(dimensions, coords, speed, seconds - 1)
 
 
@@ -39,7 +40,7 @@ def get_quadrants(grid, width, height):
     mid_y = height // 2
 
     q1 = q2 = q3 = q4 = 0
-    for (x, y), v in grid.items():
+    for (y, x), v in grid.items():
         if x < mid_x and y < mid_y:
             q1 += v
         elif x > mid_x and y < mid_y:
@@ -54,18 +55,11 @@ def get_quadrants(grid, width, height):
 
 def check_neighbors(grid):
     neighborhood = []
-    directions = [(0, 1), (0, -1), (1, 0), (-1, 0), (1, 1), (-1, -1), (1, -1), (-1, 1)]
-    for x, y in grid:
-        if grid[(x, y)] > 0:
-            neighborhood.append(sum([1 for dx, dy in directions if (coords := (x + dx, y + dy)) in grid and grid[coords] > 0]))
+    compass_values = [d.value for d in COMPASS]
+    for y, x in grid:
+        if grid[(y, x)] > 0:
+            neighborhood.append(sum([1 for dy, dx in compass_values if (coords := (y + dy, x + dx)) in grid and grid[coords] > 0]))
     return sum([n >= 2 for n in neighborhood])
-
-
-def show_grid(grid, width, height):
-    grid_array = [['' for _ in range(width)] for _ in range(height)]
-    for (x, y), value in grid.items():
-        grid_array[y][x] = str(value) if value > 0 else '.'
-    print('\n'.join([''.join(line) for line in grid_array]))
 
 
 def part1(data):
@@ -108,7 +102,7 @@ def part2(data):
             # christmas_tree = max(quadrants) > len(robots) // 2
 
         if christmas_tree:
-            show_grid(grid, *dimensions)
+            aoc.print_grid(grid, lambda value: str(value) if value > 0 else '.')
 
     return seconds
 

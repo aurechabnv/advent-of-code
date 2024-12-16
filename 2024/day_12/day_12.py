@@ -1,30 +1,21 @@
 # Day 12: Garden Groups
 
-from enum import Enum
 from functools import partial
 
 import aoc
-
-
-class CARDINALS(Enum):
-    NORTH = (-1, 0)
-    SOUTH = (1, 0)
-    EAST = (0, 1)
-    WEST = (0, -1)
-
-COMPASS = [CARDINALS.NORTH, CARDINALS.EAST, CARDINALS.SOUTH, CARDINALS.WEST]
+from aoc import COMPASS, CARDINALS
 
 GO_ALONG = {
-    CARDINALS.NORTH: [CARDINALS.EAST, CARDINALS.WEST],
-    CARDINALS.EAST: [CARDINALS.NORTH, CARDINALS.SOUTH],
-    CARDINALS.SOUTH: [CARDINALS.EAST, CARDINALS.WEST],
-    CARDINALS.WEST: [CARDINALS.NORTH, CARDINALS.SOUTH]
+    COMPASS.NORTH: [COMPASS.EAST, COMPASS.WEST],
+    COMPASS.EAST: [COMPASS.NORTH, COMPASS.SOUTH],
+    COMPASS.SOUTH: [COMPASS.EAST, COMPASS.WEST],
+    COMPASS.WEST: [COMPASS.NORTH, COMPASS.SOUTH]
 }
 
 
 def get_data(source):
     data = aoc.get_data(src=source, day=12, offset=3)
-    return data.splitlines()
+    return data
 
 
 def find_neighbors(plant: str, coords: tuple, land, regions: list):
@@ -32,11 +23,11 @@ def find_neighbors(plant: str, coords: tuple, land, regions: list):
         return
 
     y, x = coords
-    fences = COMPASS.copy()
+    fences = CARDINALS.copy()
     region = None
     neighbors = []
 
-    for direction in COMPASS:
+    for direction in CARDINALS:
         dy, dx = direction.value
         if (n_coords := (y + dy, x + dx)) in land:
             if land[n_coords].get('plant') == plant:
@@ -58,7 +49,7 @@ def find_neighbors(plant: str, coords: tuple, land, regions: list):
 
 
 def map_land(data):
-    land = {(y, x): {'plant': plant} for y, line in enumerate(data) for x, plant in enumerate(line)}
+    land = aoc.init_grid(data, lambda value: {'plant': value})
     regions = []
     for coords, plot in land.items():
         find_neighbors(plot.get('plant'), coords, land, regions)

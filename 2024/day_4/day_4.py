@@ -3,6 +3,7 @@
 from functools import partial
 
 import aoc
+from aoc import COMPASS
 
 
 def get_data(source) -> []:
@@ -11,53 +12,39 @@ def get_data(source) -> []:
 
 
 def part1(data):
-    directions = {
-        'left': (0,-1),
-        'right': (0,1),
-        'up': (-1,0),
-        'down': (1,0),
-        'up-left': (-1,-1),
-        'down-left': (1,-1),
-        'up-right': (-1,1),
-        'down-right': (1,1)
-    }
     count = 0
-    nb_col = len(data[0])
-    nb_row = len(data)
-    for row in range(nb_row):
-        for col in range(nb_col):
-            if data[row][col] == "X": # avoid processing unnecessary letters
-                for dir_h, dir_v in directions.values(): # check in every known direction
-                    word = ""
+    max_x = len(data[0])
+    max_y = len(data)
+    for y in range(max_y):
+        for x in range(max_x):
+            if data[y][x] == 'X':  # avoid processing unnecessary letters
+                for direction in COMPASS:  # check in every known direction
+                    dy, dx = direction.value
+                    word = ''
                     # build missing part of the word by moving from current letter in the desired direction
                     for nb_step in range(1, 4):
-                        y = row + (dir_h * nb_step)
-                        x = col + (dir_v * nb_step)
-                        if 0 <= y < nb_row and 0 <= x < nb_col: # check that we don't get out of range
-                            word += data[y][x]
-                    if word == "MAS": # check only the missing part since we always start from X
+                        ny = y + (dy * nb_step)
+                        nx = x + (dx * nb_step)
+                        if 0 <= ny < max_y and 0 <= nx < max_x:  # check that we don't get out of range
+                            word += data[ny][nx]
+                    if word == 'MAS':  # check only the missing part since we always start from X
                         count += 1
     return count
 
 
 def part2(data):
-    diag_1 = {
-        'up-left': (-1,-1),
-        'down-right': (1,1)
-    }
-    diag_2 = {
-        'up-right': (-1,1),
-        'down-left': (1,-1)
-    }
+    diag_1 = [COMPASS.NORTH_WEST.value, COMPASS.SOUTH_EAST.value]
+    diag_2 = [COMPASS.NORTH_EAST.value, COMPASS.SOUTH_WEST.value]
     count = 0
-    nb_col = len(data[0])
-    nb_row = len(data)
-    for row in range(nb_row):
-        for col in range(nb_col):
-            if data[row][col] == "A": # avoid processing unnecessary letters
+    max_x = len(data[0])
+    max_y = len(data)
+    for y in range(max_y):
+        for x in range(max_x):
+            if data[y][x] == 'A':  # avoid processing unnecessary letters
                 # for a given diagonal: get the two letters involved within range, order alphabetically and join for string comparison
-                get_letters = lambda directions: "".join(sorted([data[row+h][col+v] for h, v in directions.values() if 0 <= row+h < nb_row and 0 <= col+v < nb_col]))
-                if get_letters(diag_1) == get_letters(diag_2) == "MS":
+                get_letters = lambda d: ''.join(
+                    sorted([data[y + dy][x + dx] for dy, dx in d if 0 <= y + dy < max_y and 0 <= x + dx < max_x]))
+                if get_letters(diag_1) == get_letters(diag_2) == 'MS':
                     count += 1
     return count
 

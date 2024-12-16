@@ -4,6 +4,7 @@ from collections import defaultdict
 from functools import partial
 
 import aoc
+from aoc import CARDINALS
 
 
 def get_data(source):
@@ -12,7 +13,6 @@ def get_data(source):
 
 
 def get_trails(data):
-    directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     grid = {(y, x): int(item) for y, line in enumerate(data) for x, item in enumerate(line)}
     trails = [[coords] for coords, height in grid.items() if not height]
 
@@ -20,7 +20,8 @@ def get_trails(data):
         for trail in trails.copy():
             y, x = trail[-1]
             next_steps = []
-            for move_y, move_x in directions:
+            for direction in CARDINALS:
+                move_y, move_x = direction.value
                 position = (y + move_y, x + move_x)
                 if position in grid and grid[position] == height:
                     next_steps.append(position)

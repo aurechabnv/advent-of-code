@@ -1,50 +1,31 @@
-import os
-from datetime import datetime
-import time
-from enum import Enum
-
-import requests
-from dotenv import load_dotenv
-
-load_dotenv()
-
-_AOC_COOKIE = os.getenv('AOC_COOKIE')
-_CUR_YEAR = datetime.now().year
+from time import perf_counter
 
 
-class SOURCE(Enum):
-    EXAMPLE = 1
-    INPUT = 2
-
-
-def _get_input(day: int, year: int) -> str:
-    response = requests.get(f"https://adventofcode.com/{year}/day/{day}/input",
-                            cookies={'session': _AOC_COOKIE})
-    if response.status_code != 200:
-        return ''
-    return response.text
-
-
-def _get_example(day: int, year: int, offset: int) -> str:
-    response = requests.get(f"https://adventofcode.com/{year}/day/{day}",
-                            cookies={'session': _AOC_COOKIE})
-    if response.status_code != 200:
-        return ''
-    blocks = response.text.split('<pre><code>')
-    return blocks[offset + 1].split('</code></pre>')[0]
-
-
-def get_data(src: SOURCE, day: int, year=_CUR_YEAR, offset=0) -> str:
-    data = ''
-    if src == SOURCE.EXAMPLE:
-        data = _get_example(day, year=year, offset=offset)
-    elif src == SOURCE.INPUT:
-        data = _get_input(day, year=year)
-    return data.strip()
-
-
-def benchmark(title, function):
-    start_time = time.perf_counter()
+def benchmark(title: str, function: callable):
+    """
+    Execute and benchmark a function
+    :param title:
+    :param function:
+    :return:
+    """
+    start_time = perf_counter()
     result = function()
-    end_time = time.perf_counter()
+    end_time = perf_counter()
     print(f"{title}{' ' * (10 - len(title))} \t Time: {end_time - start_time:.4f} \t Result: {result}")
+
+
+def init_grid(data: str, process_value: callable = None) -> dict:
+    if not process_value:
+        process_value = lambda x: x
+    return {(y, x): process_value(v) for y, l in enumerate(data.splitlines()) for x, v in enumerate(l)}
+
+
+def print_grid(grid: dict, process_value: callable = None):
+    if not process_value:
+        process_value = lambda x: x
+    array = []
+    for (y, x), value in grid.items():
+        if y >= len(array):
+            array.append([])
+        array[y].append(process_value(value))
+    print('\n'.join(''.join(line) for line in array))

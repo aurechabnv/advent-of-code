@@ -1,9 +1,9 @@
 # Day 6: Guard Gallivant
 
-from enum import Enum
 from functools import partial
 
 import aoc
+from aoc import ARROW, DIRECTIONS
 
 
 def get_data(source):
@@ -11,40 +11,24 @@ def get_data(source):
     return [list(item) for item in data.splitlines()]
 
 
-class DIRECTION(Enum):
-    UP = '^'
-    RIGHT = '>'
-    DOWN = 'v'
-    LEFT = '<'
-
-DIR_SEQ = [DIRECTION.UP, DIRECTION.RIGHT, DIRECTION.DOWN, DIRECTION.LEFT]
-
-DIR_VALUES = {
-    DIRECTION.UP: (-1, 0),
-    DIRECTION.RIGHT: (0, 1),
-    DIRECTION.DOWN: (1, 0),
-    DIRECTION.LEFT: (0, -1)
-}
+def get_next_direction(cur_direction: ARROW):
+    dir_seq = list(DIRECTIONS.keys())
+    index = dir_seq.index(cur_direction)
+    return dir_seq[0] if index == len(dir_seq) - 1 else dir_seq[index + 1]
 
 
-def get_next_direction(cur_direction: DIRECTION):
-    index = DIR_SEQ.index(cur_direction)
-    return DIR_SEQ[0] if index == len(DIR_SEQ) - 1 else DIR_SEQ[index + 1]
-
-
-def get_cur_pos(floor_map, direction: DIRECTION):
-    marker = direction.value
-    return [(floor_map.index(row), row.index(col)) for row in floor_map for col in row if col == marker][0]
+def get_cur_pos(floor_map, direction: ARROW):
+    return [(floor_map.index(row), row.index(col)) for row in floor_map for col in row if col == direction.value][0]
 
 
 def map_patrol(floor_map, detect_loop=False):
-    direction = DIRECTION.UP
+    direction = ARROW.UP
     route = set()
     cur_y, cur_x = get_cur_pos(floor_map, direction)
     looping = False
 
     while True:
-        move_y, move_x = DIR_VALUES.get(direction)
+        move_y, move_x = DIRECTIONS.get(direction).value
         cur_spot = (cur_y, cur_x, direction.value) if detect_loop else (cur_y, cur_x)
 
         if detect_loop and cur_spot in route:

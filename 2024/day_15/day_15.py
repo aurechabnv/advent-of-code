@@ -3,6 +3,7 @@
 from functools import partial
 
 import aoc
+from aoc import DIRECTIONS, ARROW
 
 
 def get_data(source):
@@ -10,8 +11,8 @@ def get_data(source):
     warehouse = data[0]
     steps = data[1]
     if source == aoc.SOURCE.EXAMPLE:
-        steps = steps.replace('&lt;','<').replace('&gt;','>')
-    return warehouse, steps.replace('\n','')
+        steps = steps.replace('&lt;', '<').replace('&gt;', '>')
+    return warehouse, steps.replace('\n', '')
 
 
 class TILE:
@@ -25,17 +26,9 @@ class TILE:
     CRATES = [CRATE, CRATE_L, CRATE_R]
 
 
-DIRECTIONS = {
-    '<': (0, -1),
-    '>': (0, 1),
-    '^': (-1, 0),
-    'v': (1, 0)
-}
-
-
 def get_big_crate_coords(tile_type, t1_coords):
-    d = DIRECTIONS['>'] if tile_type == TILE.CRATE_L else DIRECTIONS['<']
-    t2_coords = t1_coords[0] + d[0], t1_coords[1] + d[1]
+    dy, dx = DIRECTIONS.get(ARROW.RIGHT if tile_type == TILE.CRATE_L else ARROW.LEFT).value
+    t2_coords = t1_coords[0] + dy, t1_coords[1] + dx
     return sorted([t1_coords, t2_coords])
 
 
@@ -43,7 +36,7 @@ def move_tile(warehouse, position, direction, tiles_to_move=None):
     if tiles_to_move is None:
         tiles_to_move = set()
 
-    dy, dx = direction
+    dy, dx = direction.value
     cur_tile = warehouse[position]
     is_crate = (cur_tile in TILE.CRATES)
     new_position = None
@@ -88,15 +81,6 @@ def move_tile(warehouse, position, direction, tiles_to_move=None):
     return new_position
 
 
-def show_warehouse(warehouse):
-    array = []
-    for (y, x), value in warehouse.items():
-        if y >= len(array):
-            array.append([])
-        array[y].append(value)
-    print('\n'.join(''.join(line) for line in array))
-
-
 def expand_warehouse(config):
     expand = {
         TILE.WALL: '##',
@@ -113,14 +97,14 @@ def get_crates_gps_total(data, expand=False):
     config, steps = data
     if expand:
         config = expand_warehouse(config)
-    warehouse = {(y, x): el for y, line in enumerate(config.split('\n')) for x, el in enumerate(line)}
+    warehouse = aoc.init_grid(config)
     robot = [coords for coords, piece in warehouse.items() if piece == TILE.ROBOT][0]
 
     for step in steps:
-        direction = DIRECTIONS[step]
+        direction = DIRECTIONS.get(ARROW(step))
         robot = move_tile(warehouse, robot, direction)
 
-    show_warehouse(warehouse)
+    aoc.print_grid(warehouse)
     crates = [100 * y + x for (y, x), tile in warehouse.items() if tile in [TILE.CRATE, TILE.CRATE_L]]
     return sum(crates)
 
