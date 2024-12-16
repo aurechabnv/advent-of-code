@@ -94,7 +94,7 @@ def show_warehouse(warehouse):
         if y >= len(array):
             array.append([])
         array[y].append(value)
-    print('\n'.join([''.join(line) for line in array]))
+    print('\n'.join(''.join(line) for line in array))
 
 
 def expand_warehouse(config):
