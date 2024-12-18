@@ -15,15 +15,10 @@ def get_data(source, offset=0):
 
 
 class Computer:
-    commands = []
-    pointer = 0
-    operands = dict()
-    instructions = dict()
-    outputs = []
-
     def __init__(self, data):
-        variables, commands = data
-        self.commands = commands
+        variables, self.commands = data
+        self.pointer = 0
+        self.outputs = []
         self.instructions = {
             0: self.adv,
             1: self.bxl,
