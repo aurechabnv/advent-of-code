@@ -39,3 +39,4 @@ class TILE:
     END = 'E'
     WALL = '#'
     EMPTY = '.'
+    PATH = 'O'

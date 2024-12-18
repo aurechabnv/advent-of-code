@@ -24,7 +24,7 @@ I'm joining the fun this year!
 | [Day 15: Warehouse Woes](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_15/day_15.py)         | ⭐⭐ |
 | [Day 16: Reindeer Maze](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_16/day_16.py)          | ⭐ |
 | [Day 17: Chronospatial Computer](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_17/day_17.py) | ⭐ |
-| [Day 18: RAM Run](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_18/day_18.py)                | ⭐ |
+| [Day 18: RAM Run](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_18/day_18.py)                | ⭐⭐ |
 
 
 ## How to use this repo
