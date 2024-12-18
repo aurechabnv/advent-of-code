@@ -33,3 +33,9 @@ DIRECTIONS = {
     ARROW.DOWN: COMPASS.SOUTH,
     ARROW.LEFT: COMPASS.WEST
 }
+
+class TILE:
+    START = 'S'
+    END = 'E'
+    WALL = '#'
+    EMPTY = '.'
