@@ -1,79 +1,104 @@
 # Day 16: Reindeer Maze
 
-from functools import partial
 import heapq
+from functools import partial
 
 import aoc
-from aoc import COMPASS, CARDINALS, DIRECTIONS
+from aoc import COMPASS, CARDINALS, TILE
 
 
-def get_data(source):
-    data = aoc.get_data(src=source, day=16, offset=0)
+def get_data(source, offset=0):
+    data = aoc.get_data(src=source, day=16, offset=offset)
     return data
 
 
-class TILE:
-    START = 'S'
-    END = 'E'
-    WALL = '#'
-    EMPTY = '.'
+class Maze:
+    def __init__(self, data) -> None:
+        self.grid = aoc.init_grid(data)
+        self.start = list(filter(lambda v: self.grid[v] == TILE.START, self.grid))[0]
+        self.end = list(filter(lambda v: self.grid[v] == TILE.END, self.grid))[0]
+        self.queue = []
+        self.visited = dict()
+        self.prev = dict()
+        self.path = set()
+        self.best_score = None
+        self.paths = []
+
+    def _prepare_search(self, draw):
+        if draw:
+            for key, value in self.grid.items():
+                if value == TILE.PATH:
+                    self.grid[key] = TILE.EMPTY
+        self.path = set()
+        self.paths = []
+        self.visited = dict()
+
+        start_tile = (self.start, COMPASS.EAST.value)
+        self.queue = [(0, start_tile, [start_tile])]
+        self.visited[start_tile] = 0
+
+    def find_path(self, draw=False, find_all=False):
+        self._prepare_search(draw)
+        found_path = False
+
+        while self.queue:
+            score, cur_tile, cur_path = heapq.heappop(self.queue)
+            cur_coords, cur_direction = cur_tile
+
+            if cur_coords == self.end:
+                if not found_path:
+                    self.best_score = score
+                if score == self.best_score:
+                    self.paths.append(cur_path)
+                found_path = True
+                if find_all:
+                    continue
+                break
+
+            if cur_tile in self.visited and self.visited[cur_tile] < score:
+                continue
+
+            self.visited[cur_tile] = score
+
+            d_index = CARDINALS.index(COMPASS(cur_direction))
+            directions = [CARDINALS[d_index], CARDINALS[d_index - 1], CARDINALS[(d_index + 1) % len(CARDINALS)]]
+            next_tiles = [((cur_coords[0] + d.value[0], cur_coords[1] + d.value[1]), d.value) for d in directions]
+
+            for next_tile in next_tiles:
+                coords, direction = next_tile
+                if self.grid[coords] != TILE.WALL:
+                    new_cost = self.visited[cur_tile] + (1 if direction == cur_direction else 1001)
+                    new_path = cur_path[:]
+                    new_path.append(next_tile)
+                    heapq.heappush(self.queue, (new_cost, next_tile, new_path))
+
+        if found_path:
+            self._trace_path(draw)
+
+        return found_path
+
+    def _trace_path(self, draw):
+        for path in self.paths:
+            self.path.update([coords for coords, direction in path])
+
+        if draw:
+            for coords in self.path:
+                self.grid[coords] = TILE.PATH
+            aoc.print_grid(self.grid)
+
+        return self.path
 
 
 def part1(data):
-    maze = aoc.init_grid(data)
-    start = list(filter(lambda v: maze[v] == TILE.START, maze))[0]
-    end = list(filter(lambda v: maze[v] == TILE.END, maze))[0]
-
-    start_tile = (start, COMPASS.EAST.value)
-    initial_state = (0, start_tile, None)
-    queue = [initial_state]
-    visited = {
-        start: 0
-    }
-    prev = {
-        start_tile: []
-    }
-    best_score = 500_000
-
-    while queue:
-        score, cur_tile, prev_tile = heapq.heappop(queue)
-        coords, direction = cur_tile
-
-        if cur_tile in visited and visited[cur_tile] < score:
-            if cur_tile in prev:
-                prev[cur_tile].append(prev_tile)
-            continue
-        visited[cur_tile] = score
-        if cur_tile not in prev:
-            prev[cur_tile] = [prev_tile]
-
-        if coords == end:
-            best_score = min(best_score, score)
-            break
-
-        y, x = coords
-        cardinal = COMPASS(direction)
-        dir_index = CARDINALS.index(cardinal)
-        directions = [cardinal, CARDINALS[dir_index - 1], CARDINALS[(dir_index + 1) % len(CARDINALS)]]
-        next_tiles = [((y + d.value[0], x + d.value[1]), d.value) for d in directions]
-
-        for c, d in next_tiles:
-            if maze[c] != TILE.WALL:
-                new_score = score + (1 if d == direction else 1001)
-                heapq.heappush(queue, (new_score, (c, d), cur_tile))
-
-    tile = [(c,d) for c, d in prev if c == coords][0]
-    while tile != start_tile:
-        tile = prev[tile][0]
-        coords, direction = tile
-        maze[coords] = [k.value for k, v in DIRECTIONS.items() if v == COMPASS(direction)][0]
-
-    aoc.print_grid(maze)
-    return best_score
+    maze = Maze(data)
+    maze.find_path()
+    return maze.best_score
 
 
 def part2(data):
-    return 0
+    maze = Maze(data)
+    maze.find_path(find_all=True)
+    return len(maze.path)
 
 
 if __name__ == '__main__':
