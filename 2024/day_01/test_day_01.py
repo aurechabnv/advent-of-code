@@ -1,7 +1,7 @@
 import pytest
 
 import aoc
-from day_1 import get_data, part1, part2
+from day_01 import get_data, part1, part2
 
 
 def test_example_part1():

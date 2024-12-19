@@ -1,24 +1,24 @@
 import pytest
 
 import aoc
-from day_8 import get_data, part1, part2
+from day_04 import get_data, part1, part2
 
 
 def test_example_part1():
     data = get_data(aoc.SOURCE.EXAMPLE)
-    assert part1(data) == 14
+    assert part1(data) == 18
 
 def test_input_part1():
     data = get_data(aoc.SOURCE.INPUT)
-    assert part1(data) == 305
+    assert part1(data) == 2573
 
 def test_example_part2():
     data = get_data(aoc.SOURCE.EXAMPLE)
-    assert part2(data) == 34
+    assert part2(data) == 9
 
 def test_input_part2():
     data = get_data(aoc.SOURCE.INPUT)
-    assert part2(data) == 1150
+    assert part2(data) == 1850
 
 if __name__ == '__main__':
     pytest.main()
