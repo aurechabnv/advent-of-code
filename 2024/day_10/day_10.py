@@ -9,11 +9,11 @@ from aoc import CARDINALS
 
 def get_data(source):
     data = aoc.get_data(src=source, day=10, offset=4)
-    return data.splitlines()
+    return data
 
 
 def get_trails(data):
-    grid = {(y, x): int(item) for y, line in enumerate(data) for x, item in enumerate(line)}
+    grid = aoc.init_grid(data, lambda v: int(v))
     trails = [[coords] for coords, height in grid.items() if not height]
 
     for height in range(1, 10):
