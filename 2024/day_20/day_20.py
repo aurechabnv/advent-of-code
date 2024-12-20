@@ -8,7 +8,8 @@ from aoc import TILE, CARDINALS
 
 def get_data(source):
     data = aoc.get_data(src=source, day=20)
-    return data.replace('<em>', '').replace('</em>', '')
+    threshold = 100 if source == aoc.SOURCE.INPUT else 50
+    return threshold, data.replace('<em>', '').replace('</em>', '')
 
 
 class RaceTrack:
@@ -21,16 +22,14 @@ class RaceTrack:
         self.path = []
         self.cheats = dict()
 
-    def find_cheats(self, draw=False):
-        for start_cheat in self.path:
-            sides = [((start_cheat[0] + d.value[0], start_cheat[1] + d.value[1]), d.value) for d in CARDINALS]
-            for side in sides:
-                possible_wall, direction = side
-                if self.grid[possible_wall] == TILE.WALL:
-                    end_cheat = (possible_wall[0] + direction[0], possible_wall[1] + direction[1])
-                    if end_cheat in self.grid and self.grid[end_cheat] != TILE.WALL and possible_wall not in self.cheats:
-                        excluded_path = self.path[self.path.index(start_cheat):self.path.index(end_cheat)]
-                        self.cheats[possible_wall] = len(excluded_path) - 2
+    def find_cheats(self, max_cheat_time, threshold):
+        self.find_path()
+        for start_index, cheat_start in enumerate(self.path):
+            for end_index, cheat_end in enumerate(self.path):
+                distance = abs(cheat_end[0] - cheat_start[0]) + abs(cheat_end[1] - cheat_start[1])
+                saved_picoseconds = end_index - start_index - distance
+                if saved_picoseconds >= threshold and distance <= max_cheat_time and (cheat_start, cheat_end) not in self.cheats:
+                    self.cheats[(cheat_start, cheat_end)] = saved_picoseconds
 
     def find_path(self, draw=False, cheating=False):
         self._prepare_search(draw)
@@ -70,6 +69,7 @@ class RaceTrack:
             path.append(tile)
             tile = self.previous[tile]
         path.append(self.start)
+        path.reverse()
 
         if draw:
             for el in path:
@@ -79,15 +79,19 @@ class RaceTrack:
         return path
 
 
-def part1(data):
+def get_number_of_cheats(data, picoseconds):
+    threshold, data = data
     race_track = RaceTrack(data)
-    race_track.find_path()
-    race_track.find_cheats()
-    return len([value for value in race_track.cheats.values() if value >= 100])
+    race_track.find_cheats(picoseconds, threshold)
+    return len(race_track.cheats)
+
+
+def part1(data):
+    return get_number_of_cheats(data, picoseconds=2)
 
 
 def part2(data):
-    return 0
+    return get_number_of_cheats(data, picoseconds=20)
 
 
 if __name__ == '__main__':
