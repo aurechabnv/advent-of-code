@@ -84,11 +84,12 @@ class Grid:
         self.visited[self.start] = 0
 
     def _trace_path(self, draw):
-        tile = [coords for coords in self.previous if coords == self.end][0]
-        self.path = {tile}
+        tile = self.end
+        self.path = set()
         while tile != self.start:
-            tile = self.previous[tile]
             self.path.add(tile)
+            tile = self.previous[tile]
+        self.path.add(self.start)
 
         if draw:
             for el in self.path:
