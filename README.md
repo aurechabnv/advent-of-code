@@ -26,6 +26,7 @@ I'm joining the fun this year!
 | [Day 17: Chronospatial Computer](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_17/day_17.py) | ⭐ |
 | [Day 18: RAM Run](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_18/day_18.py)                | ⭐⭐ |
 | [Day 19: Linen Layout](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_19/day_19.py)                | ⭐⭐ |
+| [Day 20: Race Condition](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_20/day_20.py)                | ⭐ |
 
 
 ## How to use this repo
