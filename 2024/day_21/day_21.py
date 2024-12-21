@@ -67,8 +67,8 @@ def get_char_sequence(pad_name: str, start: tuple, target: tuple):
                 nb_moves = shift_x
 
             if nb_moves > 0:
-                valid_first_move = do_move(start, direction.value, nb_moves) not in pad.values()
-                moves.append((valid_first_move, nb_moves, arrow.value))
+                invalid_first_move = do_move(start, direction.value, nb_moves) not in pad.values()
+                moves.append((invalid_first_move, nb_moves, arrow.value))
 
         # default order is based on direction
         # we also prioritize moves that can be performed first if some cannot (thus avoiding empty space in keypads)
