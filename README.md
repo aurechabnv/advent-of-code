@@ -7,15 +7,15 @@ I'm joining the fun this year!
 
 | Puzzle                                                                                                         | Stars |
 |----------------------------------------------------------------------------------------------------------------|----|
-| [Day 01: Historian Hysteria](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_01/day_01.py)      | ⭐⭐ | 
-| [Day 02: Red-Nosed Reports](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_02/day_02.py)        | ⭐⭐ | 
-| [Day 03: Mull It Over](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_03/day_03.py)             | ⭐⭐ | 
-| [Day 04: Ceres Search](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_04/day_04.py)             | ⭐⭐ | 
-| [Day 05: Print Queue](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_05/day_05.py)              | ⭐⭐ |
-| [Day 06: Guard Gallivant](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_06/day_06.py)          | ⭐⭐ |
-| [Day 07: Bridge Repair](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_07/day_07.py)            | ⭐⭐ |
-| [Day 08: Resonant Collinearity](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_08/day_08.py)    | ⭐⭐ |
-| [Day 09: Disk Fragmenter](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_09/day_09.py)          | ⭐⭐ |
+| [Day 01: Historian Hysteria](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_01/day_01.py)     | ⭐⭐ | 
+| [Day 02: Red-Nosed Reports](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_02/day_02.py)      | ⭐⭐ | 
+| [Day 03: Mull It Over](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_03/day_03.py)           | ⭐⭐ | 
+| [Day 04: Ceres Search](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_04/day_04.py)           | ⭐⭐ | 
+| [Day 05: Print Queue](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_05/day_05.py)            | ⭐⭐ |
+| [Day 06: Guard Gallivant](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_06/day_06.py)        | ⭐⭐ |
+| [Day 07: Bridge Repair](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_07/day_07.py)          | ⭐⭐ |
+| [Day 08: Resonant Collinearity](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_08/day_08.py)  | ⭐⭐ |
+| [Day 09: Disk Fragmenter](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_09/day_09.py)        | ⭐⭐ |
 | [Day 10: Hoof It](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_10/day_10.py)                | ⭐⭐ |
 | [Day 11: Plutonian Pebbles](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_11/day_11.py)      | ⭐⭐ |
 | [Day 12: Garden Groups](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_12/day_12.py)          | ⭐⭐ |
@@ -25,9 +25,9 @@ I'm joining the fun this year!
 | [Day 16: Reindeer Maze](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_16/day_16.py)          | ⭐⭐ |
 | [Day 17: Chronospatial Computer](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_17/day_17.py) | ⭐ |
 | [Day 18: RAM Run](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_18/day_18.py)                | ⭐⭐ |
-| [Day 19: Linen Layout](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_19/day_19.py)                | ⭐⭐ |
-| [Day 20: Race Condition](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_20/day_20.py)                | ⭐⭐ |
-| [Day 21: Keypad Conundrum](https://github.com/aurechabnv/advent-of-code/blob/main/2124/day_21/day_21.py)                | ⭐⭐ |
+| [Day 19: Linen Layout](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_19/day_19.py)           | ⭐⭐ |
+| [Day 20: Race Condition](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_20/day_20.py)         | ⭐⭐ |
+| [Day 21: Keypad Conundrum](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_21/day_21.py)       | ⭐⭐ |
 
 
 ## How to use this repo
