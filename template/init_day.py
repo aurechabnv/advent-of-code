@@ -43,7 +43,7 @@ matches = re.compile(fr'(\| \[Day ({str(int(day)-1).zfill(2)}): (.*)].*\|)').sea
 last_table_line = matches.group(1)
 new_table_line = ((last_table_line.replace(matches.group(2), day.zfill(2))
                                   .replace(matches.group(3), day_title))
-                                  .replace('⭐',''))
+                                  .replace('⭐⭐','⭐'))
 content = content.replace(last_table_line, last_table_line + '\n' + new_table_line)
 with open(base_path / 'README.md', 'w') as f:
     f.write(content)
