@@ -34,7 +34,7 @@ def part2(data):
     for buyer in data:
         secret_number = buyer
         buyer_numbers = [(secret_number % 10, 0)]
-        known_sequences, prices, changes = set(), set(), set()
+        known_sequences = set()
 
         # save price and price difference
         for i in range(2000):
@@ -44,7 +44,7 @@ def part2(data):
 
         # extract sequences and add the corresponding price in the dictionary
         # process only first occurrence of a sequence per buyer
-        prices, changes = set(zip(*buyer_numbers))
+        prices, changes = tuple(zip(*buyer_numbers))
         for i in range(len(buyer_numbers) - 3):
             seq = changes[i : i + 4]
             if seq not in known_sequences:
