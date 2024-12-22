@@ -1,7 +1,6 @@
 # Day 17: Chronospatial Computer
 
 from functools import partial
-from math import trunc
 from re import compile
 
 import aoc
@@ -16,7 +15,6 @@ def get_data(source, offset=0):
 
 class Computer:
     def __init__(self, data):
-        variables, self.commands = data
         self.pointer = 0
         self.outputs = []
         self.instructions = {
@@ -34,13 +32,22 @@ class Computer:
             1: 1,
             2: 2,
             3: 3,
-            4: variables[0],
-            5: variables[1],
-            6: variables[2],
+            4: None,
+            5: None,
+            6: None,
             7: 7
         }
+        self.original_values, self.commands = data
+        self.set_abc()
+
+    def set_abc(self, a=None):
+        self.operands[4] = a if a else self.original_values[0]
+        self.operands[5] = self.original_values[1]
+        self.operands[6] = self.original_values[2]
 
     def start(self):
+        self.outputs = []
+        self.pointer = 0
         while self.pointer < len(self.commands):
             instruction = self.commands[self.pointer]
             operand = self.commands[(self.pointer + 1)]
@@ -48,6 +55,21 @@ class Computer:
             if jump:
                 self.pointer += 2
         return ','.join(self.outputs)
+
+    def find_copy(self):
+        compare_list = list(map(str, self.commands))
+        possible_a = [0]
+        for i in range(1, len(self.commands) + 1):
+            found = []
+            for p in possible_a:
+                for j in range(8):
+                    a_value = p * (2 ** 3) + j
+                    self.set_abc(a=a_value)
+                    self.start()
+                    if self.outputs == compare_list[-i:]:
+                        found.append(a_value)
+            possible_a = found
+        return min(possible_a)
 
     def adv(self, operand):
         self.operands[4] = self._dv(operand)
@@ -84,7 +106,7 @@ class Computer:
         return True
 
     def _dv(self, operand):
-        return trunc(self.operands[4] / (2 ** self.operands[operand]))
+        return self.operands[4] // (2 ** self.operands[operand])
 
 
 
@@ -94,7 +116,8 @@ def part1(data):
 
 
 def part2(data):
-    return 0
+    computer = Computer(data)
+    return computer.find_copy()
 
 
 if __name__ == '__main__':

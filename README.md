@@ -23,7 +23,7 @@ I'm joining the fun this year!
 | [Day 14: Restroom Redoubt](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_14/day_14.py)       | ⭐⭐ |
 | [Day 15: Warehouse Woes](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_15/day_15.py)         | ⭐⭐ |
 | [Day 16: Reindeer Maze](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_16/day_16.py)          | ⭐⭐ |
-| [Day 17: Chronospatial Computer](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_17/day_17.py) | ⭐ |
+| [Day 17: Chronospatial Computer](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_17/day_17.py) | ⭐⭐ |
 | [Day 18: RAM Run](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_18/day_18.py)                | ⭐⭐ |
 | [Day 19: Linen Layout](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_19/day_19.py)           | ⭐⭐ |
 | [Day 20: Race Condition](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_20/day_20.py)         | ⭐⭐ |
