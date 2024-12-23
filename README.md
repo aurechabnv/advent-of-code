@@ -28,7 +28,8 @@ I'm joining the fun this year!
 | [Day 19: Linen Layout](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_19/day_19.py)           | ⭐⭐ |
 | [Day 20: Race Condition](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_20/day_20.py)         | ⭐⭐ |
 | [Day 21: Keypad Conundrum](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_21/day_21.py)       | ⭐⭐ |
-| [Day 22: Monkey Market](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_22/day_22.py)       | ⭐⭐ |
+| [Day 22: Monkey Market](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_22/day_22.py)          | ⭐⭐ |
+| [Day 23: Lan Party](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_23/day_23.py)              | ⭐⭐ |
 
 
 ## How to use this repo
