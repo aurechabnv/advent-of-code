@@ -31,6 +31,7 @@ I'm joining the fun this year!
 | [Day 22: Monkey Market](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_22/day_22.py)          | ⭐⭐ |
 | [Day 23: Lan Party](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_23/day_23.py)              | ⭐⭐ |
 | [Day 24: Crossed Wires](https://github.com/aurechabnv/advent-of-code/blob/main/2024/day_24/day_24.py)              | ⭐ |
+| [Day 25: Code Chronicle](https://github.com/aurechabnv/advent-of-code/blob/main/2025/day_25/day_25.py)              | ⭐ |
 
 
 ## How to use this repo
