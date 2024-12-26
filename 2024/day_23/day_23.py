@@ -1,6 +1,7 @@
 # Day 23: Lan Party
 
 import itertools
+from collections import defaultdict
 from functools import partial
 
 import aoc
@@ -8,45 +9,40 @@ import aoc
 
 def get_data(source):
     data = aoc.get_data(src=source, day=23)
-    return [v.split('-') for v in data.splitlines()]
+    return [tuple(sorted(v.split('-'))) for v in data.splitlines()]
 
 
-def find_network(networks, computers):
-    for i, net in enumerate(networks):
-        if all([c in net for c in computers]):
-            return True
-    return False
+def find_cliques(graph, candidates, potential_clique=None, processed=None):
+    candidates = set(candidates)
+    potential_clique = potential_clique or set()
+    processed = processed or set()
+    if not candidates and not processed and len(potential_clique) > 2:
+        yield potential_clique
+    while candidates:
+        c = candidates.pop()
+        yield from find_cliques(graph, candidates.intersection(graph[c]), potential_clique.union([c]), processed.intersection(graph[c]))
+        processed.add(c)
 
 
 def get_networks(data):
-    networks = []
-    for i, computer_link in enumerate(data):
-        network_updated = False
-        for j, network in enumerate(networks):
-            if any([c in network for c in computer_link]):
-                check_value = [c for c in computer_link if c not in network]
-                if check_value:
-                    if all([find_network(data, [c, check_value[0]]) for c in network]):
-                        networks[j].append(check_value[0])
-                        network_updated = True
-                        break
-        if not network_updated:
-            networks.append(computer_link)
+    graph = defaultdict(set)
+    for a, b in data:
+        graph[a].add(b)
+        graph[b].add(a)
+    networks = list(find_cliques(graph, graph.keys()))
     return networks
 
 
 def part1(data):
-    networks = get_networks(data)
-    test_dict = dict()
-    networks = [sorted(n) for n in networks]
+    networks = [sorted(n) for n in get_networks(data)]
+    search_party = set()
     for n in networks:
         if len(n) > 3:
-            networks.extend(list(itertools.combinations(n, 3)))
-            continue
-        n = tuple(n)
-        if n not in test_dict:
-            test_dict[n] = any([v.startswith('t') and len(n) > 2 for v in n])
-    return sum(list(test_dict.values()))
+            search_party.update(map(tuple, map(sorted, itertools.combinations(n, 3))))
+        else:
+            search_party.add(tuple(n))
+    result = [any(v.startswith('t') for v in n) for n in search_party]
+    return sum(result)
 
 
 def part2(data):
@@ -56,6 +52,6 @@ def part2(data):
 
 
 if __name__ == '__main__':
-    aoc_data = get_data(aoc.SOURCE.EXAMPLE)
+    aoc_data = get_data(aoc.SOURCE.INPUT)
     aoc.benchmark('Part 1', partial(part1, aoc_data))
     aoc.benchmark('Part 2', partial(part2, aoc_data))
