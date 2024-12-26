@@ -1,4 +1,4 @@
-# Day 23: Lan Party
+# Day 23: LAN Party
 
 import itertools
 from collections import defaultdict
