@@ -6,8 +6,8 @@ I'm joining the fun again!
 ## [2025](https://github.com/aurechabnv/advent-of-code/tree/main/2025) ![aoc_2025](https://github.com/aurechabnv/advent-of-code/actions/workflows/aoc_2025.yml/badge.svg)
 
 | Puzzle                                                                                                  | Stars |
-|---------------------------------------------------------------------------------------------------------|--|
-| [Day 01: Secret Entrance](https://github.com/aurechabnv/advent-of-code/blob/main/2025/day_01/day_01.py) |  |
+|---------------------------------------------------------------------------------------------------------|------|
+| [Day 01: Secret Entrance](https://github.com/aurechabnv/advent-of-code/blob/main/2025/day_01/day_01.py) | ⭐⭐ |
 
 
 ## [2024](https://github.com/aurechabnv/advent-of-code/tree/main/2024) ![aoc_2024](https://github.com/aurechabnv/advent-of-code/actions/workflows/aoc_2024.yml/badge.svg)
