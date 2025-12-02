@@ -8,7 +8,7 @@ on:
       - "2025/**"
 
 env:
-  YEAR: 2024
+  YEAR: 2025
   AOC_COOKIE: ${{ secrets.AOC_COOKIE }}
 
 jobs:
