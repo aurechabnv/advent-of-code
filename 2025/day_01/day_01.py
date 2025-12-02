@@ -52,10 +52,10 @@ def part2(data):
                 shift = abs(shift)
 
                 # get basic number of turns of big rotation (>100)
-                nb_turns += (nb_of_full_turns := shift // 100)
+                nb_turns += shift // 100
 
                 # add a rotation if the remainder is still larger than starting point
-                if (shift - nb_of_full_turns * 100) > start > 0:
+                if (shift % 100) > start > 0:
                     nb_turns += 1
 
             counter += nb_turns
