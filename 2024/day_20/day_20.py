@@ -7,7 +7,7 @@ from aoc import TILE, CARDINALS
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=20)
+    data = aoc.get_data(src=source, year=2024, day=20)
     threshold = 100 if source == aoc.SOURCE.INPUT else 50
     return threshold, data.replace('<em>', '').replace('</em>', '')
 

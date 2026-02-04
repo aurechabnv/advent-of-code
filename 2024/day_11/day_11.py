@@ -11,7 +11,7 @@ def get_data(source):
     if source == aoc.SOURCE.EXAMPLE:
         data = '125 17'
     else:
-        data = aoc.get_data(src=source, day=11)
+        data = aoc.get_data(src=source, year=2024, day=11)
     return data.split()
 
 

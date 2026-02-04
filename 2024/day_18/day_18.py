@@ -8,7 +8,7 @@ from aoc import CARDINALS, TILE
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=18)
+    data = aoc.get_data(src=source, year=2024, day=18)
     obstacles = [tuple(map(int, line.split(','))) for line in data.splitlines()]
     dimensions = (71, 71) if source == aoc.SOURCE.INPUT else (7, 7)
     limit = 1024 if source == aoc.SOURCE.INPUT else 12

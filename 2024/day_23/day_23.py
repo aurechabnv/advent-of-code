@@ -8,7 +8,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=23)
+    data = aoc.get_data(src=source, year=2024, day=23)
     return [tuple(sorted(v.split('-'))) for v in data.splitlines()]
 
 

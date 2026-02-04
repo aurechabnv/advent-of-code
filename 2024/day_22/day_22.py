@@ -7,7 +7,7 @@ import aoc
 
 
 def get_data(source, offset=5):
-    data = aoc.get_data(src=source, day=22, offset=offset)
+    data = aoc.get_data(src=source, year=2024, day=22, offset=offset)
     return list(map(int, data.splitlines()))
 
 

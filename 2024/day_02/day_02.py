@@ -6,7 +6,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=2)
+    data = aoc.get_data(src=source, year=2024, day=2)
     data = data.splitlines()
     return [list(map(int, item.split())) for item in data]
 

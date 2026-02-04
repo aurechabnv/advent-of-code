@@ -6,7 +6,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=5).split('\n\n')
+    data = aoc.get_data(src=source, year=2024, day=5).split('\n\n')
     rules = [tuple(map(int, rule.split('|'))) for rule in data[0].splitlines()]
     updates = [list(map(int, update.split(','))) for update in data[1].splitlines()]
     return rules, updates

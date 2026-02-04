@@ -7,7 +7,7 @@ import aoc
 
 
 def get_data(source, offset=1):
-    data = aoc.get_data(src=source, day=24, offset=offset).split('\n\n')
+    data = aoc.get_data(src=source, year=2024, day=24, offset=offset).split('\n\n')
     return data
 
 

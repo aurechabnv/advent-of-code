@@ -9,7 +9,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=13)
+    data = aoc.get_data(src=source, year=2024, day=13)
     regex = compile(r'(\d+)')
     machines = []
     for specs in data.split('\n\n'):

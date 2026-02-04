@@ -8,7 +8,7 @@ import aoc
 def get_data(source) -> (list, list):
     list1, list2 = [], []
 
-    data = aoc.get_data(src=source, day=1).split('\n')
+    data = aoc.get_data(src=source, year=2024, day=1).split('\n')
 
     for line in data:
         split_line = line.split()

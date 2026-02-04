@@ -8,7 +8,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=7)
+    data = aoc.get_data(src=source, year=2024, day=7)
     data = data.splitlines()
     data = [[int(eq.split(':')[0]), tuple(map(int, eq.split(':')[1].strip().split()))] for eq in data]
     return data

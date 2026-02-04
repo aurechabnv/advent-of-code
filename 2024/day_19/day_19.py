@@ -7,7 +7,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=19).split('\n\n')
+    data = aoc.get_data(src=source, year=2024, day=19).split('\n\n')
     return tuple(data[0].split(', ')), data[1].splitlines()
 
 

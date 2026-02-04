@@ -14,7 +14,7 @@ GO_ALONG = {
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=12, offset=3)
+    data = aoc.get_data(src=source, year=2024, day=12, offset=3)
     return data
 
 

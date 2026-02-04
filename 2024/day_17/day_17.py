@@ -7,7 +7,7 @@ import aoc
 
 
 def get_data(source, offset=0):
-    data = aoc.get_data(src=source, day=17, offset=offset)
+    data = aoc.get_data(src=source, year=2024, day=17, offset=offset)
     data = data.split('\n\n')
     regex = compile(r'-?\d+')
     return [list(map(int, regex.findall(line))) for line in data]

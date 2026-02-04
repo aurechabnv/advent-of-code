@@ -7,7 +7,7 @@ from aoc import DIRECTIONS, ARROW
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=15, offset=0).split('\n\n')
+    data = aoc.get_data(src=source, year=2024, day=15, offset=0).split('\n\n')
     warehouse = data[0]
     steps = data[1]
     if source == aoc.SOURCE.EXAMPLE:

@@ -8,7 +8,7 @@ from aoc import COMPASS, CARDINALS, TILE
 
 
 def get_data(source, offset=0):
-    data = aoc.get_data(src=source, day=16, offset=offset)
+    data = aoc.get_data(src=source, year=2024, day=16, offset=offset)
     return data
 
 

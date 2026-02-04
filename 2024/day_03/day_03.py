@@ -7,7 +7,7 @@ import aoc
 
 
 def get_data(source, offset=0) -> str:
-    data = aoc.get_data(src=source, day=3, offset=offset)
+    data = aoc.get_data(src=source, year=2024, day=3, offset=offset)
     return data
 
 

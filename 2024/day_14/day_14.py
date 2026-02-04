@@ -8,7 +8,7 @@ from aoc import COMPASS
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=14).splitlines()
+    data = aoc.get_data(src=source, year=2024, day=14).splitlines()
 
     robots = []
     regex = compile(r'-?\d+')

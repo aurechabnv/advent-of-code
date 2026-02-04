@@ -6,7 +6,7 @@ import aoc
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=1)
+    data = aoc.get_data(src=source, year=2025, day=1)
     data = data.split('\n')
     shifts = []
     for el in data:

@@ -8,7 +8,7 @@ from aoc import CARDINALS
 
 
 def get_data(source):
-    data = aoc.get_data(src=source, day=10, offset=4)
+    data = aoc.get_data(src=source, year=2024, day=10, offset=4)
     return data
 
 
