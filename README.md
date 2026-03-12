@@ -9,6 +9,7 @@ I'm joining the fun again!
 |---------------------------------------------------------------------------------------------------------|------|
 | [Day 01: Secret Entrance](https://github.com/aurechabnv/advent-of-code/blob/main/2025/day_01/day_01.py) | ⭐⭐ |
 | [Day 02: Gift Shop](https://github.com/aurechabnv/advent-of-code/blob/main/2025/day_02/day_02.py) | ⭐⭐ |
+| [Day 03: Lobby](https://github.com/aurechabnv/advent-of-code/blob/main/2035/day_03/day_03.py) | ⭐ |
 
 
 ## [2024](https://github.com/aurechabnv/advent-of-code/tree/main/2024) ![aoc_2024](https://github.com/aurechabnv/advent-of-code/actions/workflows/aoc_2024.yml/badge.svg)

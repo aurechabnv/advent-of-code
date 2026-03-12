@@ -1,0 +1,35 @@
+# Day 3: Lobby
+
+from functools import partial
+
+import aoc
+
+
+def get_data(source):
+    data = aoc.get_data(src=source, year=2025, day=3)
+    return data.splitlines()
+
+
+def part1(data):
+    joltages = []
+    for line in data:
+        start, end = 0, 0
+        for idx, char in enumerate(line):
+            char = int(char)
+            if char > start and idx != len(line) - 1:
+                start = char
+                end = 0
+            elif char > end:
+                end = char
+        joltages.append(int(f"{start}{end}"))
+    return sum(joltages)
+
+
+def part2(data):
+    return 0
+
+
+if __name__ == '__main__':
+    aoc_data = get_data(aoc.SOURCE.INPUT)
+    aoc.benchmark('Part 1', partial(part1, aoc_data))
+    aoc.benchmark('Part 2', partial(part2, aoc_data))
