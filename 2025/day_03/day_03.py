@@ -26,7 +26,28 @@ def part1(data):
 
 
 def part2(data):
-    return 0
+    joltages = []
+
+    for bank in data:
+        required_batteries = 12
+        batteries = []
+        working_bank = bank
+
+        while len(batteries) < required_batteries:
+            cur_battery_idx = 0
+            max_idx = len(working_bank) - (required_batteries - len(batteries))
+
+            for idx in range(len(working_bank)):
+                if working_bank[idx] > working_bank[cur_battery_idx] and idx <= max_idx:
+                    cur_battery_idx = idx
+                if idx == max_idx:
+                    batteries.append(working_bank[cur_battery_idx])
+                    working_bank = working_bank[cur_battery_idx + 1:]
+                    break
+
+        joltages.append(int(''.join(batteries)))
+
+    return sum(joltages)
 
 
 if __name__ == '__main__':
